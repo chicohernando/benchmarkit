@@ -54,7 +54,9 @@
       return new Benchmark(array(
         Benchmark::URL => $curlInfo['url'],
         Benchmark::CONTENT_TYPE => $curlInfo['content_type'],
+        Benchmark::NAME_LOOKUP_TIME => $curlInfo['namelookup_time'],
         Benchmark::NUMBER_OF_BYTES => $curlInfo['size_download'],
+        Benchmark::NUMBER_OF_REDIRECTS => $curlInfo['redirect_count'],
         Benchmark::TOTAL_DOWNLOAD_TIME => $curlInfo['total_time']
       ));
     }

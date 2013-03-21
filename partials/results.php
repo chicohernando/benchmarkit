@@ -19,6 +19,14 @@
         <li><strong>Number of Bytes:</strong> <?php echo number_format($benchmark->getNumberOfBytes()) ?></li>
       <?php endif; ?>
 
+      <?php if ($benchmark->getNumberOfRedirects()) : ?>
+        <li><strong>Number of Redirects:</strong> <?php echo number_format($benchmark->getNumberOfRedirects()) ?></li>
+      <?php endif; ?>
+
+      <?php if ($benchmark->getNameLookupTime()) : ?>
+        <li><strong>Name Lookup Time:</strong> <?php echo number_format($benchmark->getNameLookupTime(), 3) ?> seconds</li>
+      <?php endif; ?>
+
       <?php if ($benchmark->getTotalDownloadTime()) : ?>
         <li><strong>Total Download Time:</strong> <?php echo number_format($benchmark->getTotalDownloadTime(), 3) ?> seconds</li>
       <?php endif; ?>

@@ -4,13 +4,17 @@
   class Benchmark {
     //define some constants for consistency
     const CONTENT_TYPE = 'CONTENT_TYPE';
+    const NAME_LOOKUP_TIME = 'NAME_LOOKUP_TIME';
     const NUMBER_OF_BYTES = 'NUMBER_OF_BYTES';
+    const NUMBER_OF_REDIRECTS = 'NUMBER_OF_REDIRECTS';
     const TOTAL_DOWNLOAD_TIME = 'TOTAL_DOWNLOAD_TIME';
     const URL = 'URL';
 
     //member variables
     protected $_contentType;
+    protected $_nameLookupTime;
     protected $_numberOfBytes;
+    protected $_numberOfRedirects;
     protected $_totalDownloadTime;
     protected $_url;
 
@@ -32,8 +36,16 @@
         $this->setContentType($options[self::CONTENT_TYPE]);
       }
 
+      if ($this->_isPresent(self::NAME_LOOKUP_TIME, $options)) {
+        $this->setNameLookupTime($options[self::NAME_LOOKUP_TIME]);
+      }
+
       if ($this->_isPresent(self::NUMBER_OF_BYTES, $options)) {
         $this->setNumberOfBytes($options[self::NUMBER_OF_BYTES]);
+      }
+
+      if ($this->_isPresent(self::NUMBER_OF_REDIRECTS, $options)) {
+        $this->setNumberOfRedirects($options[self::NUMBER_OF_REDIRECTS]);
       }
 
       if ($this->_isPresent(self::TOTAL_DOWNLOAD_TIME, $options)) {
@@ -160,6 +172,49 @@
     public function setNumberOfBytes($numberOfBytes) {
       $this->_validateFloat($numberOfBytes, 'Number of bytes');
       $this->_numberOfBytes = (float)$numberOfBytes;
+      return $this;
+    }
+
+    /**
+     * Returns the number of redirects of this benchmark or null
+     *
+     * @return mixed
+     */
+    public function getNumberOfRedirects() {
+      return !empty($this->_numberOfRedirects) ? $this->_numberOfRedirects : null;
+    }
+
+    /**
+     * This will set the number of redirects this Benchmark encountered.  Returns $this to allow for chaining.
+     * 
+     * @param int $numberOfRedirects
+     * @return Benchmark
+     */
+    public function setNumberOfRedirects($numberOfRedirects) {
+      $this->_validateFloat($numberOfRedirects, 'Number of redirects');
+      $this->_numberOfRedirects = (float)$numberOfRedirects;
+      return $this;
+    }
+
+    /**
+     * Returns the total name lookup time of this benchmark or null
+     *
+     * @return mixed
+     */
+    public function getNameLookupTime() {
+      return !empty($this->_nameLookupTime) ? $this->_nameLookupTime : null;
+    }
+
+    /**
+     * This will set the number of seconds this Benchmark took to complete a name lookup.
+     * Returns $this to allow for chaining.
+     * 
+     * @param int $nameLookupTime
+     * @return Benchmark
+     */
+    public function setNameLookupTime($nameLookupTime) {
+      $this->_validateFloat($nameLookupTime, 'Name lookup time');
+      $this->_nameLookupTime = (float)$nameLookupTime;
       return $this;
     }
 
