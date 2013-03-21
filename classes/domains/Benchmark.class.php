@@ -162,5 +162,34 @@
       $this->_url = $url;
       return $this;
     }
+
+    /**
+     * Return a JSON representation of this object
+     * 
+     * @return string
+     */
+    public function toJson() {
+      $objectVariables = get_object_vars($this);
+      
+      /**
+       * I am running into an issue where when converting to json I get keys that I don't like
+       * since I chose to make proteced/private variables use the _ prefixed notation. Instead
+       * I am going to iterate through the keys and if it starts with _ I will remove the _ from
+       * the json representation.  I couldn't use json_encode from outside of this class because
+       * the variables aren't accessible outside of this object.  Also, looked into implementing
+       * the JsonSerializable Interface, however, my PHP version doesn't support it.
+       *
+       */
+      $jsonArray = array();
+      foreach ($objectVariables as $key => $value) {
+        if (substr($key, 0, 1) === '_') {
+          $key = substr($key, 1);
+        }
+
+        $jsonArray[$key] = $value;
+      }
+
+      return json_encode($jsonArray);
+    }
   }
 ?>
