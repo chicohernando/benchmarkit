@@ -33,36 +33,13 @@
         <input type="submit" value="Benchmark this!" />
       </form>
 
-      <?php if (isset($exception)) : ?>
-        <div class="error">
-          <?php echo $exception->getMessage() ?>
-        </div>
-      <?php endif; ?>
-
-      <?php if (isset($benchmark)) : ?>
-        <div class="results">
-          <ul>
-            <?php if ($benchmark->getUrl()) : ?>
-              <li><strong>URL:</strong> <?php echo $benchmark->getUrl() ?></li>
-            <?php endif; ?>
-
-            <?php if ($benchmark->getContentType()) : ?>
-              <li><strong>Content Type:</strong> <?php echo $benchmark->getContentType() ?></li>
-            <?php endif; ?>
-
-            <?php if ($benchmark->getNumberOfBytes()) : ?>
-              <li><strong>Number of Bytes:</strong> <?php echo number_format($benchmark->getNumberOfBytes()) ?></li>
-            <?php endif; ?>
-
-            <?php if ($benchmark->getTotalDownloadTime()) : ?>
-              <li><strong>Total Download Time:</strong> <?php echo number_format($benchmark->getTotalDownloadTime(), 3) ?> seconds</li>
-            <?php endif; ?>
-          </ul>
-        </div>
-      <?php endif; ?>
+      <div class="ajax_container">
+        <?php include('partials/results.php'); ?>
+      </div>
     </div>
 
     <!-- Put JS at bottom for faster page rendering -->
     <script src="http://code.jquery.com/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="js/index.js" type="text/javascript"></script>
   </body>
 </html>
