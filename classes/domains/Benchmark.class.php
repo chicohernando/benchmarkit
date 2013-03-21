@@ -57,18 +57,18 @@
     }
 
     /**
-     * Checks to see that the variable passed in is a string or not. Returns true if it is
+     * Checks to see that the variable passed in is a float or not. Returns true if it is
      * and throws an InvalidBenchmarkException otherwise.
      * 
-     * @param string $string
+     * @param float $float
      * @param string $errorMessagePrefix
      * @return boolean
      * @throws InvalidBenchmarkException
      * 
      */
-    protected function _validateString($string, $errorMessagePrefix = 'Variable') {
-      if (!is_string($string)) {
-        throw new InvalidBenchmarkException($errorMessagePrefix . ' must be a string');
+    protected function _validateFloat($float, $errorMessagePrefix = 'Variable') {
+      if (!is_numeric($float)) {
+        throw new InvalidBenchmarkException($errorMessagePrefix . ' must be a float');
       }
 
       return true;
@@ -98,6 +98,24 @@
     }
 
     /**
+     * Checks to see that the variable passed in is a string or not. Returns true if it is
+     * and throws an InvalidBenchmarkException otherwise.
+     * 
+     * @param string $string
+     * @param string $errorMessagePrefix
+     * @return boolean
+     * @throws InvalidBenchmarkException
+     * 
+     */
+    protected function _validateString($string, $errorMessagePrefix = 'Variable') {
+      if (!is_string($string)) {
+        throw new InvalidBenchmarkException($errorMessagePrefix . ' must be a string');
+      }
+
+      return true;
+    }
+
+    /**
      * This will set the content type.  Returns $this to allow for chaining.
      * 
      * @param string $contentType
@@ -116,8 +134,8 @@
      * @return Benchmark
      */
     public function setNumberOfBytes($numberOfBytes) {
-      $this->_validateInteger($numberOfBytes, 'Number of bytes');
-      $this->_numberOfBytes = (int)$numberOfBytes;
+      $this->_validateFloat($numberOfBytes, 'Number of bytes');
+      $this->_numberOfBytes = (float)$numberOfBytes;
       return $this;
     }
 
@@ -128,8 +146,8 @@
      * @return Benchmark
      */
     public function setTotalDownloadTime($totalDownloadTime) {
-      $this->_validateInteger($totalDownloadTime, 'Total download time');
-      $this->_totalDownloadTime = (int)$totalDownloadTime;
+      $this->_validateFloat($totalDownloadTime, 'Total download time');
+      $this->_totalDownloadTime = (float)$totalDownloadTime;
       return $this;
     }
 
