@@ -48,6 +48,10 @@
       
       $data = curl_exec($this->_ch);
 
+      if (curl_errno($this->_ch)) {
+        throw new InvalidUrlException('An error occurred while benchmarking your url');
+      }
+
       //get the data back about this url request
       $curlInfo = curl_getinfo($this->_ch);
       
@@ -80,6 +84,10 @@
       $rawResponse = file_get_contents($url);
       //get the current time right NOW!
       $endTime = microtime(true);
+
+      if ($rawResponse === false) {
+        throw new InvalidUrlException('An error occurred while benchmarking your url');
+      }
 
       //get an associative array of the response headers
       $headers = $this->_parseHeaders(implode("\r\n", $http_response_header));
