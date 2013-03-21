@@ -116,6 +116,15 @@
     }
 
     /**
+     * Returns the content type of this benchmark or null
+     *
+     * @return mixed
+     */
+    public function getContentType() {
+      return !empty($this->_contentType) ? $this->_contentType : null;
+    }
+
+    /**
      * This will set the content type.  Returns $this to allow for chaining.
      * 
      * @param string $contentType
@@ -123,8 +132,23 @@
      */
     public function setContentType($contentType) {
       $this->_validateString($contentType, 'Content type');
-      $this->_contentType = $contentType;
+      /**
+       * Some content types come with a charset with them, they should be separated
+       * by a ; and the content type should be first.  The following will take the first
+       * part of the content type.  This also works even if there isn't a ;
+       */
+      $contentTypePieces = explode(';', $contentType);
+      $this->_contentType = $contentTypePieces[0];
       return $this;
+    }
+
+    /**
+     * Returns the number of bytes of this benchmark or null
+     *
+     * @return mixed
+     */
+    public function getNumberOfBytes() {
+      return !empty($this->_numberOfBytes) ? $this->_numberOfBytes : null;
     }
 
     /**
@@ -140,6 +164,15 @@
     }
 
     /**
+     * Returns the total download time of this benchmark or null
+     *
+     * @return mixed
+     */
+    public function getTotalDownloadTime() {
+      return !empty($this->_totalDownloadTime) ? $this->_totalDownloadTime : null;
+    }
+
+    /**
      * This will set the number of seconds this Benchmark took to complete. Returns $this to allow for chaining.
      * 
      * @param int $totalDownloadTime
@@ -149,6 +182,15 @@
       $this->_validateFloat($totalDownloadTime, 'Total download time');
       $this->_totalDownloadTime = (float)$totalDownloadTime;
       return $this;
+    }
+
+    /**
+     * Returns the benchmarked url or null
+     *
+     * @return mixed
+     */
+    public function getUrl() {
+      return !empty($this->_url) ? $this->_url : null;
     }
 
     /**
